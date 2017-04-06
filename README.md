@@ -1,3 +1,4 @@
 # legendary-octo-eureka
 
-Notes, results of tutorials find on the web about machine learning
+Notes and results of tutorials find on the web about machine learning.
+
