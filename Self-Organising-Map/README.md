@@ -5,9 +5,11 @@
    - ANN learns by error-correcting, is supervised, serie of layers
    - SOM learns by competitive learning, deal with unsupervised 2D grid of neurons
 - Competitive: When an imput is "presented" to the net, only one of the neuro will be activated -> neurons "compete" for each input.
-- Data compression known as vector quantisation
+- Data compression known as vector quantization
 
-## Use case
+
+
+## Advantages
 **Finding structure**
 SOM is meant to be a 2D repr of a multi-dim dataset. Similar inputs in the multi-dim will map the same 2D node. 
 
@@ -18,7 +20,11 @@ SOM finds a lower-dim repr while preserving the similarity between records
 
 **Visualisation**
 
+This is the primary purpose of generating a map. 
 
+**Incremental**
+
+The learning of a SOM is incremental thus we can update a map with new data. This is particulary interesting if the data points retain their old label.
 
 ## SOM Parameters
 
@@ -65,10 +71,48 @@ In this equation, $\Theta_t$ is a Gaussian decay so the amount of learning will 
 
 $\Theta_t=\exp(-\frac{dist^2}{2\sigma^2_t})$ 
 
+#### Notes
+
+If we were to make a SMO again, even if we use the same stttings, where each groups ends up could be different due to randomization in the learning process.
+
+## Somoclu
+
+It is a library to compute SOM efficiently by parallezing the algorithm. After regrouping the data by the SOM algorithm, it will show a color map for each attribute.
+
+The edge map shows the border between groups in the data. When there is a large change between two nodes in the SOM, the edge is brighter.
+
+The density map shows how many data points each node has.
+
+#### Notes
+
+We can use a clustering algorithm like kmeans or a classification model on the top of the data representation made by SOM.
+
+
+
+## Interpretation
+
+Since the SOM tries above all to preserve local structures, the interpretation of the map should predominantly be done locally, based on the local relations of the data items on the map.
+The global structure is often useful as well, however.
+
+Yet another method that aids in the interpretation of the maps is to add some external information on the organized map like the class label if available. The distribution of the samples of each class, plotted on the map as a density histogram, may also help in the interpretation process.
+
+If the distributions of the known classes are overlapping, such displays can even be used to explore the degree of overlap in different types of samples. It may be possible to gain insight into whether the classes actually co-exist or whether new kinds of features should be added to the data items to make the classes more easily separable.
+
+#### Evaluation
+
+We can use the classification accuracy to indicate how well the classes are separated on the map, and the
+classification accuracy of new samples to measure the generalizability of the result.
+
+Generalizability could be measured as the sensitivity of the map to small variations in the input data, caused either by adding artificial noise or by cross-validation.
+
 ## Sources
 
 [yhat_part1](http://blog.yhat.com/posts/self-organizing-maps-1.html)
 [ai-junkie](http://www.ai-junkie.com/ann/som/som1.html)
+
+[thesis of Kaski, S., *Data exploration using self-organizing maps.*](http://users.ics.aalto.fi/sami/thesis/thesis_tohtml.html)
+
+[IFC Soft](http://homes.cs.washington.edu/~kthayer/ifcsoft/som.html)
 
 ## Tag
 
